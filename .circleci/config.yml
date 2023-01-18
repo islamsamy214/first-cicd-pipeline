@@ -1,7 +1,6 @@
 version: 2.1
 
 defaults: &defaults # a reusable aliases
-  working_directory: ~/
   docker:
     - image: circleci/node:13.8.0
 
