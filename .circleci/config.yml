@@ -1,0 +1,37 @@
+version: 2.1
+
+defaults: &defaults # a reusable aliases
+  working_directory: ~/
+  docker:
+    - image: circleci/node:13.8.0
+  steps:
+    - checkout
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - run:
+          command: "npm i"
+      - run:
+          command: "npm run lint"
+  test:
+    <<: *defaults
+    steps:
+      - run:
+          command: "npm run test"
+  analyze:
+    <<: *defaults
+    steps:
+      - run:
+          command: "npm audit"
+workflows:
+  first-pipeline-workflow:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - analyze:
+          requires:
+            - test
