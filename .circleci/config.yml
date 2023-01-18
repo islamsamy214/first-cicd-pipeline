@@ -17,6 +17,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: npm i
       - run:
           command: "npm run test"
   analyze:
